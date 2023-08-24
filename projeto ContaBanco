@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class ContaBancaria {
+    private String nomeTitular;
+    private String numeroConta;
+    private double saldo;
+
+    public ContaBancaria(String nomeTitular, String numeroConta, double saldo) {
+        this.nomeTitular = nomeTitular;
+        this.numeroConta = numeroConta;
+        this.saldo = saldo;
+    }
+
+    public String getNomeTitular() {
+        return nomeTitular;
+    }
+
+    public String getNumeroConta() {
+        return numeroConta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Depósito realizado. Novo saldo: " + saldo);
+    }
+
+    public void sacar(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+            System.out.println("Saque realizado. Novo saldo: " + saldo);
+        } else {
+            System.out.println("Saldo insuficiente.");
+        }
+    }
+}
+
+public class ContaTerminal {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite o nome do titular da conta: ");
+        String nomeTitular = sc.nextLine();
+
+        System.out.print("Digite o número da conta: ");
+        String numeroConta = sc.nextLine();
+
+        System.out.print("Digite o saldo inicial: ");
+        double saldoInicial = sc.nextDouble();
+
+        ContaBancaria conta = new ContaBancaria(nomeTitular, numeroConta, saldoInicial);
+
+        System.out.println("\nConta criada com sucesso:");
+        System.out.println("Titular: " + conta.getNomeTitular());
+        System.out.println("Número da conta: " + conta.getNumeroConta());
+        System.out.println("Saldo: " + conta.getSaldo());
+
+        System.out.print("\nDigite o valor a ser depositado: ");
+        double valorDeposito = sc.nextDouble();
+        conta.depositar(valorDeposito);
+
+        System.out.print("Digite o valor a ser sacado: ");
+        double valorSaque = sc.nextDouble();
+        conta.sacar(valorSaque);
+    }
+}
